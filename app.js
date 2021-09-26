@@ -33,6 +33,7 @@ const toDoListSchema = new mongoose.Schema({
 const item = mongoose.model('item', toDoListSchema);
 
 app.get('/',(req,res)=>{
+    console.log("server /")
     item.find({},(found,err)=>{
         if(!err){
             // console.log(found)

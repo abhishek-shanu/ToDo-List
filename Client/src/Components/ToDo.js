@@ -11,10 +11,11 @@ const ToDo =()=>{
     const [countTasks,setCountTasks] = useState(0);
 
     useEffect(()=>{
-        axios.get('http://localhost:3001')
+        axios.get('/')
         .then((response)=>{
             // console.log("get response",response.data[0].item_)
             setEnteredToDos((prevState)=>{
+                console.log(response)
                 const data= response.data.map((item)=>item)
                 setCountTasks(data.length);
                 return data;
@@ -36,7 +37,7 @@ const ToDo =()=>{
             event.preventDefault()
             return
         }
-        axios.post('http://localhost:3001', {
+        axios.post('/', {
             toDoContent:toDoContent,
         })
         .then(function (response) {
@@ -54,7 +55,7 @@ const ToDo =()=>{
         event.preventDefault()
     }
     const handleClearTasks=(event)=>{
-        axios.delete('http://localhost:3001',{})
+        axios.delete('/',{})
         .then((response)=>{
             setCountTasks(0);
             setEnteredToDos([]);
@@ -64,8 +65,7 @@ const ToDo =()=>{
         return;
     }
     const handleDelete=(id)=>{
-        console.log(id,"handleDelete")
-        axios.delete('http://localhost:3001',{ data: { id: id } })
+        axios.delete('/',{ data: { id: id } })
         .then((response)=>{
             setEnteredToDos((prevState)=>{
                 const item_list=prevState.filter((item)=>{
