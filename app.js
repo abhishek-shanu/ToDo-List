@@ -81,11 +81,11 @@ app.delete('/delete',(req,res)=>{
 
 //heroko deployment
 if ( process.env.NODE_ENV === "production"){
-    // app.use('/static', express.static(path.join(__dirname, 'Client/build')));
-    app.use(express.static("Client/build"));
+    // app.use('/static', express.static(path.join(__dirname, 'client/build')));
+    app.use(express.static("client/build"));
     const path = require("path");
     app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'Client', 'build', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 }
 
