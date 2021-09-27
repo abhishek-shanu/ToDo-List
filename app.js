@@ -33,7 +33,7 @@ const toDoListSchema = new mongoose.Schema({
 });
 const item = mongoose.model('item', toDoListSchema);
 
-app.get('/',(req,res)=>{
+app.get('/get',(req,res)=>{
     console.log("server /")
     item.find({},(found,err)=>{
         if(!err){
@@ -45,7 +45,7 @@ app.get('/',(req,res)=>{
     })
 })
 
-app.post('/',(req,res)=>{
+app.post('/post',(req,res)=>{
     const toDoIte = new item({
         item_:req.body.toDoContent
     });
@@ -58,7 +58,7 @@ app.post('/',(req,res)=>{
     // console.log(req.body)
 })
 
-app.delete('/',(req,res)=>{
+app.delete('/delete',(req,res)=>{
     if(!Object.keys(req.body).length){
         item.deleteMany({})
         .then((response)=>{
@@ -80,7 +80,7 @@ app.delete('/',(req,res)=>{
 })
 
 //heroko deployment
-if ( process.env.NODE_ENV == "production"){
+if ( process.env.NODE_ENV === "production"){
     // app.use('/static', express.static(path.join(__dirname, 'Client/build')));
     app.use(express.static("Client/build"));
     const path = require("path");

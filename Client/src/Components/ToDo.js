@@ -11,7 +11,7 @@ const ToDo =()=>{
     const [countTasks,setCountTasks] = useState(0);
 
     useEffect(()=>{
-        axios.get('/')
+        axios.get('/get')
         .then((response)=>{
             // console.log("get response",response.data[0].item_)
             setEnteredToDos((prevState)=>{
@@ -37,7 +37,7 @@ const ToDo =()=>{
             event.preventDefault()
             return
         }
-        axios.post('/', {
+        axios.post('/post', {
             toDoContent:toDoContent,
         })
         .then(function (response) {
@@ -55,7 +55,7 @@ const ToDo =()=>{
         event.preventDefault()
     }
     const handleClearTasks=(event)=>{
-        axios.delete('/',{})
+        axios.delete('/delete',{})
         .then((response)=>{
             setCountTasks(0);
             setEnteredToDos([]);
@@ -65,7 +65,7 @@ const ToDo =()=>{
         return;
     }
     const handleDelete=(id)=>{
-        axios.delete('/',{ data: { id: id } })
+        axios.delete('/delete',{ data: { id: id } })
         .then((response)=>{
             setEnteredToDos((prevState)=>{
                 const item_list=prevState.filter((item)=>{
